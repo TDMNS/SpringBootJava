@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Тестовый сайт</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div th:insert = "fragments :: header"></div>
+<div th:each="iterator : ${url}">
+    <img th:src="${iterator.enteredURL}" class="img">
+</div>
+<div>
+    <img src="http://www.winscreen.ru/uploads/posts/2018-03/1521183548_atmowalls-4_result.jpg" alt="Mountain" class="img">
+    <img src="http://www.winscreen.ru/uploads/posts/2018-03/1521183647_atmowalls-9_result.jpg" alt="Sky" class="img">
+    <img src="http://www.winscreen.ru/uploads/posts/2018-03/1521183621_atmowalls-12_result.jpg" alt="Mountain" class="img">
+    <img src="http://www.winscreen.ru/uploads/posts/2018-03/1521183633_atmowalls-22_result.jpg" alt="City" class="img">
+    <img src="http://www.winscreen.ru/uploads/posts/2018-03/1521184267_atmowalls-15_result.jpg" alt="Mountain" class="img">
+</div>
+</body>
+</html>

@@ -47,6 +47,16 @@ h {
     justify-content: center;
 }
 
+h3 {
+    font-size: 10px;
+    font-weight: normal;
+    text-shadow: 0 0 15px #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 .scale {
     transition: 1s; /* Время эффекта */
 }
