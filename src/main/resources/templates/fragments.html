@@ -6,10 +6,17 @@
             <a class="p-2 text-dark" href="/greeting">Greeting</a>
             <a class="p-2 text-dark" href="/gallery">4K Gallery</a>
             <a class="p-2 text-dark" href="/image/add">Add Image</a>
+            <a sec:authorize="isAuthenticated()">
+                <a>Welcome, <span sec:authentication="name">Username</span></a>
+                <a class="p-2 text-dark" href="/logout">Exit</a>
+            </a>
+            <a sec:authorize="isAnonymous()">
+                <a class="p-2 text-dark" href="/login">Login</a>
+            </a>
         </nav>
     </div>
 </div>
 
 <div th:fragment = "main">
-<!--    <p>Main</p>-->
+    <p>Main</p>
 </div>
