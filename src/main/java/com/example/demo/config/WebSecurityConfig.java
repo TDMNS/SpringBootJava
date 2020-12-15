@@ -12,6 +12,11 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -33,19 +38,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
     }
 
-    @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("admin")
-                        .password("qwaser")
-                        .roles("USER")
-                        .build();
-
-        return new InMemoryUserDetailsManager(user);
-    }
-}
+//    @Bean
+//    @Override
+//    public UserDetailsService userDetailsService() {
+//        UserDetails user =
+//                User.withDefaultPasswordEncoder()
+//                        .username("admin")
+//                        .password("qwaser")
+//                        .roles("ADMIN")
+//                        .build();
+//
+//        return new InMemoryUserDetailsManager(user);
+//    }
+//}
 
 //    @Bean
 //    public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource ds) {
@@ -69,4 +74,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //
 //        return manager;
 //    }
-//}
+@Bean
+public PasswordEncoder passwordEncoder()
+{
+    return new BCryptPasswordEncoder();
+}
+
+@Bean
+public InMemoryUserDetailsManager inMemoryUserDetailsManager()
+{
+    List<UserDetails> userDetailsList = new ArrayList<>();
+    userDetailsList.add(User.withUsername("admin").password(passwordEncoder().encode("qwaser"))
+            .roles("ADMIN", "ADMIN").build());
+    userDetailsList.add(User.withUsername("manager").password(passwordEncoder().encode("password"))
+            .roles("MANAGER", "USER").build());
+    userDetailsList.add(User.withUsername("user").password(passwordEncoder().encode("qqqqqq"))
+            .roles("MANAGER", "USER").build());
+
+    return new InMemoryUserDetailsManager(userDetailsList);
+}
+}
